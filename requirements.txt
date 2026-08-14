@@ -1,0 +1,8 @@
+pandas
+scikit-learn
+joblib
+streamlit
+altair
+PyPDF2
+streamlit-lottie
+requests
