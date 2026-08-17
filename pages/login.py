@@ -193,8 +193,8 @@ with right_col:
     if st.button("Continue with Google", use_container_width=True, key="google_btn"):
         try:
             st.login()
-        except Exception:
-            st.warning("Google login is not configured. Please use email and password.")
+        except Exception as e:
+            st.warning(f"Google login error: {e}")
 
     st.markdown(
         "<div style='margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.07);"
