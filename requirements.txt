@@ -1,7 +1,8 @@
 pandas
 scikit-learn
 joblib
-streamlit
+streamlit>=1.42.0
+Authlib>=1.3.2
 altair
 PyPDF2
 streamlit-lottie
