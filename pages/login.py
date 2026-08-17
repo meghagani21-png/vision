@@ -192,7 +192,7 @@ with right_col:
     )
     if st.button("Continue with Google", use_container_width=True, key="google_btn"):
         try:
-            st.login()
+            st.login("google")
         except Exception as e:
             st.warning(f"Google login error: {e}")
 
