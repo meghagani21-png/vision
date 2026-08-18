@@ -12,8 +12,7 @@ st.markdown("<style>[data-testid='stSidebar']{display:none!important;}</style>",
 if is_logged_in():
     st.rerun()
 
-if "auth_tab" not in st.session_state:
-    st.session_state.auth_tab = "signin"
+# st.tabs handles active tab state natively now
 
 left_col, right_col = st.columns([1.15, 0.95])
 
@@ -80,18 +79,6 @@ with left_col:
 # ── RIGHT AUTH PANEL ──────────────────────────────────────────────────────────
 with right_col:
     st.markdown(
-        "<style>"
-        ".tab-row{display:flex;border-radius:14px;background:rgba(255,255,255,0.05);"
-        "border:1px solid rgba(255,255,255,0.09);padding:4px;gap:4px;margin-bottom:24px;}"
-        ".tab-btn{flex:1;text-align:center;padding:10px 0;border-radius:10px;"
-        "font-size:14px;font-weight:600;color:rgba(255,255,255,0.4);}"
-        ".tab-btn.active{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;"
-        "box-shadow:0 4px 14px rgba(124,58,237,0.35);}"
-        "</style>",
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
         "<div style='margin-bottom:24px;'>"
         "<div style='font-size:18px;font-weight:800;color:#fff;letter-spacing:-0.3px;'>"
         "Vision <span style='color:rgba(255,255,255,0.3);font-weight:400;'>Careers AI</span>"
@@ -99,24 +86,10 @@ with right_col:
         unsafe_allow_html=True
     )
 
-    tab    = st.session_state.auth_tab
-    si_cls = "tab-btn active" if tab == "signin" else "tab-btn"
-    su_cls = "tab-btn active" if tab == "signup" else "tab-btn"
-    st.markdown(
-        f"<div class='tab-row'><div class='{si_cls}'>Sign In</div><div class='{su_cls}'>Sign Up</div></div>",
-        unsafe_allow_html=True
-    )
-
-    tc1, tc2 = st.columns(2)
-    with tc1:
-        if st.button("Sign In", key="btn_si", use_container_width=True):
-            st.session_state.auth_tab = "signin"; st.rerun()
-    with tc2:
-        if st.button("Sign Up", key="btn_su", use_container_width=True):
-            st.session_state.auth_tab = "signup"; st.rerun()
+    tab_signin, tab_signup = st.tabs(["Sign In", "Sign Up"])
 
     # ── SIGN IN ───────────────────────────────────────────────────────────────
-    if st.session_state.auth_tab == "signin":
+    with tab_signin:
         st.markdown(
             "<div style='font-size:22px;font-weight:800;color:#fff;margin-bottom:4px;'>Welcome back</div>"
             "<div style='font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px;'>Sign in to your Vision account</div>",
@@ -141,12 +114,12 @@ with right_col:
 
         st.markdown(
             "<div style='text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,0.35);'>"
-            "No account? Click <b style='color:#a78bfa;'>Sign Up</b> above.</div>",
+            "No account? Select <b style='color:#a78bfa;'>Sign Up</b> above.</div>",
             unsafe_allow_html=True
         )
 
     # ── SIGN UP ───────────────────────────────────────────────────────────────
-    else:
+    with tab_signup:
         st.markdown(
             "<div style='font-size:22px;font-weight:800;color:#fff;margin-bottom:4px;'>Create account</div>"
             "<div style='font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px;'>Free forever. No credit card needed.</div>",
@@ -178,7 +151,7 @@ with right_col:
 
         st.markdown(
             "<div style='text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,0.35);'>"
-            "Already have an account? Click <b style='color:#a78bfa;'>Sign In</b> above.</div>",
+            "Already have an account? Select <b style='color:#a78bfa;'>Sign In</b> above.</div>",
             unsafe_allow_html=True
         )
 
